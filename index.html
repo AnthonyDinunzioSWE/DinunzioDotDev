@@ -1,1084 +1,949 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary SEO Meta Tags -->
-    <title>DinunzioDotDev | Enterprise Software Engineering & Digital Architecture</title>
-    <meta name="title" content="DinunzioDotDev | Enterprise Software Engineering & Digital Architecture">
-    <meta name="description" content="DinunzioDotDev architects and engineers secure, scalable SaaS platforms, distributed cloud systems, and bespoke web applications built for infinite scale.">
-    <meta name="keywords" content="Software Architecture, SaaS Development, Cloud Engineering, Full-Stack Development, React, Python, Enterprise Solutions">
-    <meta name="author" content="DinunzioDotDev">
-    <meta name="theme-color" content="#050505">
-
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dinunziodotdev.ca/">
-    <meta property="og:title" content="DinunzioDotDev | Enterprise Software Engineering">
-    <meta property="og:description" content="Architecting digital foundations behind modern SaaS platforms and cloud infrastructure.">
-
-    <!-- Twitter Card -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://dinunziodotdev.ca/">
-    <meta property="twitter:title" content="DinunzioDotDev | Enterprise Software Engineering">
-    <meta property="twitter:description" content="Architecting digital foundations behind modern SaaS platforms and cloud infrastructure.">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script defer src="assets/js/script.js"></script>
-
-    <style>
-        /* ==========================================================================
-           DESIGN TOKENS & ROOT VARIABLES
-           ========================================================================== */
-        :root {
-            --bg-black: #050505;
-            --bg-surface: #0a0a0f;
-            --bg-card: rgba(18, 18, 26, 0.65);
-            --border-card: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(37, 99, 235, 0.4);
-
-            --accent-blue: #2563EB;
-            --accent-purple: #7C3AED;
-            --accent-cyan: #06B6D4;
-
-            --text-heading: #FFFFFF;
-            --text-body: #94A3B8;
-            --text-muted: #64748B;
-
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-
-            --transition-fast: 0.2s ease;
-            --transition-base: 0.35s ease;
-            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            background-color: var(--bg-black);
-            color: var(--text-body);
-            font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            width: 100%;
-        }
-
-        /* Scroll Reveal Fallback */
-        .reveal {
-            opacity: 1 !important;
-            transform: none !important;
-        }
-
-        /* ==========================================================================
-           HEADER & NAVIGATION
-           ========================================================================== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(5, 5, 5, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-card);
-            transition: background 0.3s ease;
-        }
-
-        .header.scrolled {
-            background: rgba(5, 5, 5, 0.95);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 72px;
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            transition: var(--transition-fast);
-        }
-
-        .logo:hover {
-            color: var(--accent-blue);
-        }
-
-        .logo span {
-            color: var(--accent-blue);
-            font-family: var(--font-mono);
-        }
-
-        .nav {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav a {
-            color: var(--text-body);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition-fast);
-            position: relative;
-        }
-
-        .nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-blue);
-            transition: width var(--transition-fast);
-        }
-
-        .nav a:hover::after,
-        .nav a.active::after {
-            width: 100%;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            color: var(--text-heading);
-        }
-
-        .nav-cta {
-            padding: 0.5rem 1.25rem;
-            border-radius: 6px;
-            background: rgba(37, 99, 235, 0.15);
-            border: 1px solid var(--accent-blue);
-            color: var(--text-heading) !important;
-            transition: all var(--transition-fast) !important;
-            font-weight: 600;
-        }
-
-        .nav-cta:hover {
-            background: var(--accent-blue);
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-heading);
-            font-size: 1.5rem;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 6px;
-            width: 32px;
-            height: 32px;
-        }
-
-        .nav-toggle span {
-            width: 24px;
-            height: 2px;
-            background: currentColor;
-            border-radius: 2px;
-            transition: var(--transition-fast);
-        }
-
-        .nav-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(10px, 10px);
-        }
-
-        .nav-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .nav-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        /* ==========================================================================
-           HERO SECTION
-           ========================================================================== */
-        .hero {
-            position: relative;
-            padding: 9rem 0 5rem;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .hero-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 4rem 4rem;
-            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
-        }
-
-        .glow-blue {
-            position: absolute;
-            top: -100px;
-            right: -50px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, rgba(5, 5, 5, 0) 70%);
-            filter: blur(100px);
-            animation: drift-slow 8s ease-in-out infinite;
-        }
-
-        .glow-purple {
-            position: absolute;
-            top: 20%;
-            right: 10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
-            filter: blur(100px);
-            animation: drift-fast 12s ease-in-out infinite reverse;
-        }
-
-        @keyframes drift-slow {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
-        }
-
-        @keyframes drift-fast {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(30px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-        }
-
-        .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: 9999px;
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.3);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: #60A5FA;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            animation: fade-in 0.6s ease-out;
-        }
-
-        .badge-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #60A5FA;
-            box-shadow: 0 0 8px #60A5FA;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
-        }
-
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4.25rem);
-            font-weight: 700;
-            line-height: 1.08;
-            letter-spacing: -0.03em;
-            color: var(--text-heading);
-            margin-bottom: 1.25rem;
-            animation: fade-in 0.7s ease-out 0.1s both;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #FFFFFF 30%, #93C5FD 70%, var(--accent-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-description {
-            font-size: 1.125rem;
-            color: var(--text-body);
-            margin-bottom: 2.25rem;
-            line-height: 1.7;
-            animation: fade-in 0.7s ease-out 0.2s both;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            animation: fade-in 0.7s ease-out 0.3s both;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1.75rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all var(--transition-base);
-        }
-
-        .btn.primary {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: #FFFFFF;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .btn.primary:hover {
-            box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .btn.primary:active {
-            transform: translateY(0);
-        }
-
-        .btn.secondary {
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-heading);
-            border: 1px solid var(--border-card);
-            backdrop-filter: blur(8px);
-        }
-
-        .btn.secondary:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Terminal Graphic */
-        .hero-visual {
-            position: relative;
-            z-index: 1;
-        }
-
-        .terminal-card {
-            background: rgba(10, 10, 15, 0.85);
-            border: 1px solid var(--border-card);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(12px);
-            animation: fade-in 0.8s ease-out 0.4s both;
-        }
-
-        .terminal-header {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-card);
-        }
-
-        .terminal-dots {
-            display: flex;
-            gap: 0.4rem;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .dot.red { background: #EF4444; }
-        .dot.yellow { background: #F59E0B; }
-        .dot.green { background: #10B981; }
-
-        .terminal-title {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .terminal-body {
-            padding: 1.25rem;
-            font-family: var(--font-mono);
-            font-size: 0.825rem;
-            color: #E2E8F0;
-            line-height: 1.7;
-        }
-
-        .code-keyword { color: #F472B6; }
-        .code-func { color: #60A5FA; }
-        .code-string { color: #34D399; }
-        .code-comment { color: var(--text-muted); }
-
-        /* ==========================================================================
-           TRUST METRICS
-           ========================================================================== */
-        .trust-strip {
-            padding: 2.5rem 0;
-            border-top: 1px solid var(--border-card);
-            border-bottom: 1px solid var(--border-card);
-            background: rgba(255, 255, 255, 0.01);
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .trust-item {
-            opacity: 0;
-            animation: fade-in 0.6s ease-out forwards;
-        }
-
-        .trust-item:nth-child(1) { animation-delay: 0s; }
-        .trust-item:nth-child(2) { animation-delay: 0.1s; }
-        .trust-item:nth-child(3) { animation-delay: 0.2s; }
-        .trust-item:nth-child(4) { animation-delay: 0.3s; }
-
-        .trust-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            font-family: var(--font-mono);
-            margin-bottom: 0.5rem;
-        }
-
-        .trust-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* ==========================================================================
-           SECTIONS & CARDS
-           ========================================================================== */
-        .section {
-            padding: 6rem 0;
-            position: relative;
-        }
-
-        .section-header {
-            max-width: 650px;
-            margin-bottom: 3.5rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
-        }
-
-        .section-description {
-            color: var(--text-body);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.75rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all var(--transition-slow);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            animation: fade-in 0.6s ease-out forwards;
-        }
-
-        .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 0.1s; }
-        .card:nth-child(3) { animation-delay: 0.2s; }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
-            opacity: 0;
-            transition: opacity var(--transition-base);
-        }
-
-        .card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 8px;
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #60A5FA;
-            margin-bottom: 1.25rem;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            color: var(--text-heading);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .card p {
-            color: var(--text-body);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-            line-height: 1.7;
-        }
-
-        .card-link {
-            color: #60A5FA;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            transition: gap var(--transition-fast);
-        }
-
-        .card-link:hover {
-            gap: 0.6rem;
-        }
-
-        /* ==========================================================================
-           CTA SECTION
-           ========================================================================== */
-        .cta-banner {
-            background: linear-gradient(180deg, rgba(18, 18, 26, 0.4) 0%, rgba(37, 99, 235, 0.1) 100%);
-            border: 1px solid var(--border-card);
-            border-radius: 16px;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation: fade-in 0.8s ease-out;
-        }
-
-        .cta-banner h2 {
-            max-width: 600px;
-            margin: 0 auto 1rem;
-        }
-
-        .cta-banner p {
-            max-width: 550px;
-            margin: 0 auto 2rem;
-        }
-
-        /* ==========================================================================
-           FOOTER
-           ========================================================================== */
-        .footer {
-            border-top: 1px solid var(--border-card);
-            padding: 4rem 0 2rem;
-            background: #020203;
-            font-size: 0.9rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand h3 {
-            color: var(--text-heading);
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            max-width: 280px;
-        }
-
-        .footer-links-column h4 {
-            color: var(--text-heading);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .footer-links-column ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .footer-links-column a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color var(--transition-fast);
-        }
-
-        .footer-links-column a:hover {
-            color: var(--text-heading);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            color: var(--text-muted);
-        }
-
-        /* ==========================================================================
-           RESPONSIVE DESIGN
-           ========================================================================== */
-        @media (min-width: 992px) {
-            .hero {
-                display: grid;
-                grid-template-columns: 1.15fr 0.85fr;
-                gap: 3.5rem;
-            }
-
-            .hero-content {
-                grid-column: 1;
-            }
-
-            .hero-visual {
-                grid-column: 2;
-                grid-row: 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                position: fixed;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: var(--bg-surface);
-                border-bottom: 1px solid var(--border-card);
-                flex-direction: column;
-                padding: 2rem;
-                display: none;
-                max-height: calc(100vh - 72px);
-                overflow-y: auto;
-            }
-
-            .nav.open {
-                display: flex;
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-
-            .nav-cta {
-                width: 100%;
-                text-align: center;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .terminal-card {
-                display: none;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus States for Accessibility */
-        a:focus-visible,
-        button:focus-visible {
-            outline: 2px solid var(--accent-blue);
-            outline-offset: 2px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DinunzioDotDev — Software Engineering, Edmonton AB</title>
+<meta name="description" content="DinunzioDotDev is the engineering practice of Anthony Tyler-Scott Dinunzio — custom software, web, SaaS, and mobile products, built by one senior engineer with 8 years in production software. Based in Edmonton, AB, Canada.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B0F14'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='%23C9A227' text-anchor='middle'%3E.%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B0F14;
+    --panel:#12181F;
+    --panel-2:#171F2A;
+    --line: rgba(232,230,223,0.10);
+    --line-strong: rgba(232,230,223,0.18);
+    --text:#E8E6DF;
+    --muted:#8B94A3;
+    --brass:#C9A227;
+    --brass-bright:#E4BE4A;
+    --aurora:#3FA796;
+    --radius: 2px;
+    --maxw: 1180px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0;
+    color:#F4F2EC;
+  }
+
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit;}
+
+  ::selection{background:var(--brass); color:var(--ink);}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:2px solid var(--brass-bright);
+    outline-offset:3px;
+  }
+
+  .dot{color:var(--brass);}
+  .cursor{
+    display:inline-block;
+    width:0.5em;
+    background:var(--brass-bright);
+    margin-left:2px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  /* background texture: faint blueprint dot grid + aurora glow */
+  .bg-grid{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image: radial-gradient(rgba(232,230,223,0.06) 1px, transparent 1px);
+    background-size: 26px 26px;
+    background-position: -6px -6px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+  .bg-aurora{
+    position:fixed; z-index:0; pointer-events:none;
+    top:-20%; left:50%; transform:translateX(-50%);
+    width:1400px; height:900px;
+    background:
+      radial-gradient(ellipse 40% 30% at 30% 20%, rgba(63,167,150,0.16), transparent 60%),
+      radial-gradient(ellipse 35% 25% at 70% 10%, rgba(201,162,39,0.13), transparent 60%);
+    filter: blur(10px);
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,15,20,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:1.15rem;
+    letter-spacing:-0.01em;
+    display:flex; align-items:center; gap:2px;
+  }
+  .nav-links{
+    display:flex; align-items:center; gap:36px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+  }
+  .nav-links a{
+    color:var(--muted);
+    position:relative;
+    padding:4px 0;
+    transition:color .2s var(--ease);
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:var(--brass); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s var(--ease);
+  }
+  .nav-links a:hover::after{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--brass); color:var(--ink);
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:0.8rem;
+    padding:10px 18px; border-radius:var(--radius);
+    border:1px solid var(--brass);
+    transition: background .2s var(--ease), transform .2s var(--ease);
+  }
+  .menu-btn{display:none; background:none; border:1px solid var(--line-strong); color:var(--text); padding:8px 10px; border-radius:var(--radius); cursor:pointer;}
+
+  @media (max-width:860px){
+    .nav-links{
+      position:fixed; top:65px; left:0; right:0;
+      background:var(--panel); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:flex-start; gap:0;
+      max-height:0; overflow:hidden;
+      transition:max-height .3s var(--ease);
+      padding:0 32px;
+    }
+    .nav-links.open{max-height:320px; padding:16px 32px 24px;}
+    .nav-links a{width:100%; padding:12px 0; border-bottom:1px solid var(--line);}
+    .menu-btn{display:block;}
+  }
+
+.nav-cta{
+
+    position:relative;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+
+    min-width:190px;
+    height:46px;
+
+    padding:0 34px;
+
+    border-radius:6px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(201,162,39,.14),
+            rgba(201,162,39,.06)
+        );
+
+    color:var(--text) !important;
+
+    border:1px solid rgba(201,162,39,.35);
+
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    font-weight:600;
+
+    letter-spacing:.04em;
+    text-transform:uppercase;
+
+    transition:
+        color .3s var(--ease),
+        border-color .3s var(--ease),
+        background .3s var(--ease),
+        transform .3s var(--ease),
+        box-shadow .3s var(--ease);
+
+    overflow:hidden;
+
+}
+
+/* subtle brass glow layer */
+
+.nav-cta::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(201,162,39,.22),
+            transparent 65%
+        );
+
+    opacity:0;
+
+    transition:
+        opacity .35s var(--ease);
+
+}
+
+
+/* animated shine */
+
+.nav-cta::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:60%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.12),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    transition:
+        left .8s var(--ease);
+
+}
+
+
+
+.nav-cta:hover{
+
+    color:#F4F2EC !important;
+
+    border-color:
+
+        rgba(201,162,39,.55);
+
+    background:
+
+        rgba(201,162,39,.08);
+
+    transform:
+
+        translateY(-2px);
+
+
+    box-shadow:
+
+        0 15px 40px rgba(0,0,0,.35),
+        0 0 30px rgba(201,162,39,.12);
+
+}
+
+
+.nav-cta:hover::before{
+
+    opacity:1;
+
+}
+
+
+.nav-cta:hover::after{
+
+    left:140%;
+
+}
+
+
+
+.nav-cta:active{
+
+    transform:translateY(0);
+
+}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 90px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:""; width:7px; height:7px; border-radius:50%;
+    background:var(--brass); display:inline-block;
+    box-shadow:0 0 0 4px rgba(201,162,39,0.18);
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 4.6vw, 4rem);
+    max-width:16ch;
+  }
+  .hero p.lead{
+    margin-top:24px;
+    font-size:1.12rem;
+    color:var(--muted);
+    max-width:50ch;
+    line-height:1.7;
+  }
+  .hero-ctas{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:0.85rem;
+    padding:14px 26px; border-radius:var(--radius);
+    display:inline-flex; align-items:center; gap:10px;
+    transition:all .2s var(--ease);
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--brass); color:var(--ink); border:1px solid var(--brass);}
+  .btn-primary:hover{background:var(--brass-bright); transform:translateY(-1px); box-shadow:0 8px 24px -8px rgba(201,162,39,0.5);}
+  .btn-ghost{background:transparent; color:var(--text); border:1px solid var(--line-strong);}
+  .btn-ghost:hover{border-color:var(--brass); color:var(--brass-bright);}
+
+  .hero-meta{
+    display:flex; gap:28px; margin-top:56px; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--muted);
+  }
+  .hero-meta span{color:var(--text);}
+
+  /* terminal panel */
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--line-strong);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:13px 16px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--line);
+  }
+  .terminal-bar .tdot{width:10px; height:10px; border-radius:50%; background:#3a4350;}
+  .terminal-bar .label{
+    margin-left:8px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--muted);
+  }
+  .terminal-body{
+    padding:26px 24px 30px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.86rem;
+    line-height:1.85;
+    min-height:340px;
+    color:#C7CDD6;
+    white-space:pre-wrap;
+  }
+  .terminal-body .prompt{color:var(--aurora);}
+  .terminal-body .out{color:var(--brass-bright);}
+  .terminal-body .dim{color:var(--muted);}
+
+  /* ---------- SECTION SCAFFOLDING ---------- */
+  section{padding:110px 0; position:relative;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(1.8rem, 3vw, 2.6rem);}
+  .section-head p{color:var(--muted); margin-top:16px; font-size:1.02rem; line-height:1.7;}
+  .divider{height:1px; background:var(--line); border:none; margin:0;}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s var(--ease), transform .7s var(--ease);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:960px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .services-grid{grid-template-columns:1fr;} }
+  .svc-card{
+    background:var(--panel);
+    padding:36px 28px;
+    transition:background .25s var(--ease);
+  }
+  .svc-card:hover{background:var(--panel-2);}
+  .svc-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--brass);
+    letter-spacing:0.03em;
+  }
+  .svc-card h3{font-size:1.28rem; margin-top:16px;}
+  .svc-card p{color:var(--muted); font-size:0.94rem; margin-top:12px; line-height:1.65;}
+
+  /* ---------- PROCESS ---------- */
+  .process-list{border-top:1px solid var(--line);}
+  .phase{
+    display:grid;
+    grid-template-columns:100px 200px 1fr;
+    gap:24px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  @media (max-width:760px){
+    .phase{grid-template-columns:60px 1fr; row-gap:8px;}
+    .phase .p-name{grid-column:2;}
+    .phase .p-desc{grid-column:2;}
+  }
+  .p-index{font-family:'IBM Plex Mono', monospace; color:var(--brass); font-size:0.85rem;}
+  .p-name{font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:1.1rem;}
+  .p-desc{color:var(--muted); font-size:0.95rem; line-height:1.7;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:280px 1fr; gap:64px; align-items:start;
+  }
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .badge{
+    width:180px; height:180px; border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:2.6rem;
+    color:var(--brass-bright);
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(63,167,150,0.14), transparent 60%),
+      var(--panel);
+    position:relative;
+  }
+  .badge::after{
+    content:""; position:absolute; inset:14px; border:1px solid rgba(201,162,39,0.35);
+  }
+  .about-copy p{color:var(--muted); font-size:1.02rem; line-height:1.8; margin:0 0 18px;}
+  .about-copy strong{color:var(--text); font-weight:600;}
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); margin-top:44px;
+  }
+  @media (max-width:700px){ .stat-row{grid-template-columns:repeat(2,1fr);} }
+  .stat{background:var(--panel); padding:26px 22px;}
+  .stat .num{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:1.9rem; color:var(--brass-bright);}
+  .stat .lbl{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--muted); margin-top:8px; letter-spacing:0.02em;}
+
+  /* ---------- STACK STRIP ---------- */
+  .stack-strip{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:40px;
+  }
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    border:1px solid var(--line-strong); color:var(--muted);
+    padding:8px 14px; border-radius:20px;
+  }
+
+  /* ---------- ENGAGEMENTS ---------- */
+  .eng-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:860px){ .eng-grid{grid-template-columns:1fr;} }
+  .eng-card{background:var(--panel); padding:32px 28px;}
+  .eng-card .kicker{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--aurora);}
+  .eng-card h4{margin-top:14px; font-size:1.08rem;}
+  .eng-card p{color:var(--muted); font-size:0.92rem; margin-top:10px; line-height:1.6;}
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background:var(--panel);
+    border:1px solid var(--line-strong);
+    padding:64px 48px;
+    display:flex; align-items:center; justify-content:space-between; gap:32px;
+    flex-wrap:wrap;
+  }
+  .cta-band h3{font-size:1.7rem; max-width:20ch;}
+  .cta-band p{color:var(--muted); margin-top:10px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block; font-family:'IBM Plex Mono', monospace; font-size:0.75rem;
+    color:var(--muted); margin-bottom:8px; letter-spacing:0.02em;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; background:var(--panel); border:1px solid var(--line-strong);
+    color:var(--text); padding:13px 14px; border-radius:var(--radius);
+    font-family:'IBM Plex Sans', sans-serif; font-size:0.95rem;
+    transition:border-color .2s var(--ease);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--brass); outline:none;}
+  .field textarea{resize:vertical; min-height:120px;}
+  .contact-side h4{font-size:1rem; font-family:'IBM Plex Mono', monospace; color:var(--brass); letter-spacing:0.02em; margin-bottom:16px;}
+  .contact-line{display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line); align-items:baseline;}
+  .contact-line .k{font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--muted); width:90px; flex-shrink:0;}
+  .contact-line .v{font-size:0.98rem;}
+  .form-status{margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--aurora); min-height:1.4em;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line); padding:44px 0;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-row .mono{color:var(--muted); font-size:0.78rem;}
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a{color:var(--muted); font-family:'IBM Plex Mono', monospace; font-size:0.78rem; transition:color .2s;}
+  .foot-links a:hover{color:var(--brass-bright);}
+</style>
 </head>
-
 <body>
 
-    <!-- =========================
-         NAVIGATION
-    ========================= -->
-    <header class="header">
-        <nav class="navbar container" aria-label="Main Navigation">
-            <a href="index.html" class="logo" aria-label="DinunzioDotDev Home">
-                Dinunzio<span>.dev</span>
-            </a>
+<div class="bg-aurora" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
 
-            <button class="nav-toggle" id="navToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+<header>
+  <nav class="nav">
+    <a href="#top" class="logo">dinunzio<span class="dot">.</span>dev</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="nav-cta" style="margin-top:12px;">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+  </nav>
+</header>
 
-            <ul class="nav" id="primary-nav">
-                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html" class="nav-cta">Start Project</a></li>
-            </ul>
-        </nav>
-    </header>
+<main id="top">
 
-    <main>
-
-        <!-- =========================
-             HERO SECTION
-        ========================= -->
-        <section class="hero">
-            <div class="hero-background" aria-hidden="true">
-                <div class="hero-grid"></div>
-                <div class="glow-blue"></div>
-                <div class="glow-purple"></div>
-            </div>
-
-            <!-- Left Column -->
-            <div class="hero-content">
-                <div class="badge-pill">
-                    <span class="badge-dot"></span>
-                    Engineering Next-Gen Platforms
-                </div>
-
-                <h1>
-                    Architecting Digital<br>
-                    <span class="gradient-text">Systems That Scale</span>
-                </h1>
-
-                <p class="hero-description">
-                    DinunzioDotDev is an enterprise software studio specializing in high-throughput backend architecture, resilient cloud infrastructure, and bespoke SaaS engineering for organizations demanding precision and performance.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="contact.html" class="btn primary">
-                        Initiate Project
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <a href="about.html" class="btn secondary">Explore Capabilities</a>
-                </div>
-            </div>
-
-            <!-- Right Column: Terminal Visual -->
-            <div class="hero-visual">
-                <div class="terminal-card">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <div class="terminal-title">architecture_config.ts</div>
-                    </div>
-                    <div class="terminal-body">
-                        <p><span class="code-comment">// High-Scale Enterprise Core</span></p>
-                        <p><span class="code-keyword">import</span> { PlatformEngine } <span class="code-keyword">from</span> <span class="code-string">'@dinunzio/core'</span>;</p>
-                        <br>
-                        <p><span class="code-keyword">export const</span> <span class="code-func">config</span> = {</p>
-                        <p>&nbsp;&nbsp;security: <span class="code-string">'Zero-Trust'</span>,</p>
-                        <p>&nbsp;&nbsp;infrastructure: <span class="code-string">'Distributed'</span>,</p>
-                        <p>&nbsp;&nbsp;database: <span class="code-string">'PostgreSQL/Redis'</span>,</p>
-                        <p>&nbsp;&nbsp;uptime: <span class="code-string">'99.99% SLA'</span></p>
-                        <p>};</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================
-             TRUST & PROOF
-        ========================= -->
-        <section class="trust-strip">
-            <div class="container">
-                <div class="trust-grid">
-                    <div class="trust-item">
-                        <div class="trust-number">99.99%</div>
-                        <div class="trust-label">Target Uptime SLA</div>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-number">Zero-Trust</div>
-                        <div class="trust-label">Security Architecture</div>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-number">&lt;100ms</div>
-                        <div class="trust-label">Global Latency</div>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-number">Full-Stack</div>
-                        <div class="trust-label">Engineering Excellence</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================
-             CORE CAPABILITIES
-        ========================= -->
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="badge-pill">ENGINEERING PILLARS</span>
-                    <h2 class="section-title">Built for Performance, Security & Longevity</h2>
-                    <p class="section-description">
-                        We architect resilient digital infrastructure tailored to support your organization's long-term business goals with technical precision and strategic foresight.
-                    </p>
-                </div>
-
-                <div class="cards-grid">
-
-                    <article class="card reveal">
-                        <div class="card-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                            </svg>
-                        </div>
-                        <h3>SaaS Platform Architecture</h3>
-                        <p>End-to-end multi-tenant applications engineered for rapid growth, complete data isolation, and seamless automated billing orchestration.</p>
-                        <a href="services.html" class="card-link">Learn More &rarr;</a>
-                    </article>
-
-                    <article class="card reveal">
-                        <div class="card-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                        </div>
-                        <h3>Backend & Security Engineering</h3>
-                        <p>Robust distributed APIs, cloud-native design patterns, and database optimization backed by zero-trust security and enterprise encryption.</p>
-                        <a href="services.html" class="card-link">Learn More &rarr;</a>
-                    </article>
-
-                    <article class="card reveal">
-                        <div class="card-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <h3>High-Performance Web Applications</h3>
-                        <p>Lightning-fast reactive interfaces with React, modern state management, and edge-optimized delivery pipelines for global performance.</p>
-                        <a href="services.html" class="card-link">Learn More &rarr;</a>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================
-             CALL TO ACTION
-        ========================= -->
-        <section class="section">
-            <div class="container">
-                <div class="cta-banner reveal">
-                    <span class="badge-pill">NEXT STEPS</span>
-                    <h2 class="section-title">Ready to Build Infrastructure Designed for the Future?</h2>
-                    <p class="section-description">
-                        Whether launching a sophisticated SaaS product or modernizing legacy systems, let's transform your vision into production-ready reality.
-                    </p>
-                    <a href="contact.html" class="btn primary">
-                        Schedule Technical Consultation
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-
-                <div class="footer-brand">
-                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
-                        Dinunzio<span>.dev</span>
-                    </a>
-                    <p>Enterprise software solutions engineered for performance, security, and infinite scalability.</p>
-                </div>
-
-                <div class="footer-links-column">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-links-column">
-                    <h4>Expertise</h4>
-                    <ul>
-                        <li><a href="services.html">SaaS Platforms</a></li>
-                        <li><a href="services.html">Cloud Architecture</a></li>
-                        <li><a href="services.html">Full-Stack Development</a></li>
-                        <li><a href="services.html">Security Systems</a></li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 DinunzioDotDev. All Rights Reserved.</p>
-                <p>Engineered with Precision & Integrity</p>
-            </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Edmonton, AB — Software Engineering</div>
+        <h1>Innovate Build Elevate <span class="dot">.</span></h1>
+        <p class="lead">DinunzioDotDev is the engineering practice of Anthony Tyler-Scott Dinunzio. Custom software, web, SaaS, and mobile products — architected, built, and shipped by a single senior hand, not handed off to a bench of juniors.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Start a project →</a>
+          <a href="#work" class="btn btn-ghost">See how I work</a>
         </div>
-    </footer>
+        <div class="hero-meta">
+          <div>Founder <span>Anthony Tyler-Scott Dinunzio</span></div>
+          <div>Based in <span>Edmonton, AB, Canada</span></div>
+          <div>Experience <span>8 years, production software</span></div>
+        </div>
+      </div>
 
-    <!-- Interactive Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Navigation Toggle
-            const toggleBtn = document.getElementById('navToggleBtn');
-            const primaryNav = document.getElementById('primary-nav');
+      <div class="terminal reveal" id="termWrap">
+        <div class="terminal-bar">
+          <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+          <span class="label">dinunziodotdev.ca — zsh</span>
+        </div>
+        <div class="terminal-body" id="termBody" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
 
-            if (toggleBtn && primaryNav) {
-                toggleBtn.addEventListener('click', () => {
-                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-                    toggleBtn.setAttribute('aria-expanded', !isExpanded);
-                    toggleBtn.classList.toggle('active');
-                    primaryNav.classList.toggle('open');
-                });
+  <hr class="divider">
 
-                // Close menu when link is clicked
-                primaryNav.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        toggleBtn.setAttribute('aria-expanded', 'false');
-                        toggleBtn.classList.remove('active');
-                        primaryNav.classList.remove('open');
-                    });
-                });
-            }
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Services</div>
+        <h2>What I build</h2>
+        <p>Four disciplines, one engineer who understands how they connect — so the backend, the front end, and the platform underneath it are never someone else's problem to reconcile.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="services-grid reveal">
+        <div class="svc-card">
+          <div class="svc-tag">svc / custom-software</div>
+          <h3>Custom Software</h3>
+          <p>Purpose-built systems for the process only your business runs — internal tools, automation, and integrations that off-the-shelf software was never going to fit.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-tag">svc / web</div>
+          <h3>Web</h3>
+          <p>Fast, accessible, production-grade websites and web applications — from marketing sites that convert to full front ends backed by real architecture.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-tag">svc / saas</div>
+          <h3>SaaS</h3>
+          <p>Multi-tenant products built to scale: auth, billing, dashboards, and the unglamorous infrastructure that keeps a SaaS alive well past launch day.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-tag">svc / mobile</div>
+          <h3>Mobile</h3>
+          <p>Native and cross-platform apps for iOS and Android, engineered with the same rigor and testing discipline as the backend behind them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            // Header scroll effect
-            const header = document.querySelector('.header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
+  <hr class="divider">
 
-            // Intersection Observer for reveal animations
-            const revealElements = document.querySelectorAll('.reveal');
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Process</div>
+        <h2>How an engagement runs</h2>
+        <p>The same five phases on every project, regardless of size — so you always know what's happening and what happens next.</p>
+      </div>
+      <div class="process-list reveal">
+        <div class="phase">
+          <div class="p-index">phase 01</div>
+          <div class="p-name">Discovery</div>
+          <div class="p-desc">A working session on the problem, the constraints, and what success actually looks like — before a single line of code or a single estimate gets written.</div>
+        </div>
+        <div class="phase">
+          <div class="p-index">phase 02</div>
+          <div class="p-name">Architecture</div>
+          <div class="p-desc">A concrete technical plan: data model, stack, integration points, and the trade-offs on the table, reviewed with you before build begins.</div>
+        </div>
+        <div class="phase">
+          <div class="p-index">phase 03</div>
+          <div class="p-name">Build</div>
+          <div class="p-desc">Iterative development in short cycles, with working software you can see and test at every step — not a black box until the reveal.</div>
+        </div>
+        <div class="phase">
+          <div class="p-index">phase 04</div>
+          <div class="p-name">Ship</div>
+          <div class="p-desc">Deployment, monitoring, and a handover that includes documentation your next hire can actually read.</div>
+        </div>
+        <div class="phase">
+          <div class="p-index">phase 05</div>
+          <div class="p-name">Support</div>
+          <div class="p-desc">Ongoing maintenance and iteration after launch, with the same engineer who built it — no re-onboarding a new team to fix a bug.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+  <hr class="divider">
 
-            revealElements.forEach(element => observer.observe(element));
-        });
-    </script>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <div class="badge">
+        <img
+            src="./assets/images/founder.jpg"
+            alt="Anthony Tyler-Scott Dinunzio"
+            class="founder-image"
+        />
+    </div>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">About</div>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.6rem); margin-bottom:22px;">Anthony Tyler-Scott Dinunzio</h2>
+        <div class="about-copy">
+          <p><strong>Founder and Lead Senior Engineer</strong> of DinunzioDotDev, based in Edmonton, Alberta. Eight years of professional development across custom software, web, SaaS, and mobile — the practice built around one principle: the person who architects the system is the person who builds it.</p>
+          <p>No account managers relaying requirements, no rotating juniors learning on your codebase. Every engagement runs through the same senior engineer, start to finish — which means fewer handoffs, fewer misunderstandings, and software that reflects one coherent set of decisions rather than a committee's worth of compromises.</p>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">8</div><div class="lbl">YEARS IN PRODUCTION SOFTWARE</div></div>
+          <div class="stat"><div class="num">4</div><div class="lbl">DISCIPLINES COVERED IN-HOUSE</div></div>
+          <div class="stat"><div class="num">1</div><div class="lbl">SENIOR ENGINEER ON EVERY PROJECT</div></div>
+          <div class="stat"><div class="num">YEG</div><div class="lbl">EDMONTON, AB · CANADA</div></div>
+        </div>
+        <div class="stack-strip">
+          <span class="chip">TypeScript</span>
+          <span class="chip">React / Next.js</span>
+          <span class="chip">Node.js</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Swift / Kotlin</span>
+          <span class="chip">AWS / GCP</span>
+          <span class="chip">Docker</span>
+          <span class="chip">CI / CD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- WORK / ENGAGEMENT TYPES -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Engagements</div>
+        <h2>The kind of work that fits</h2>
+        <p>A sample of the project shapes DinunzioDotDev is built for — every engagement is scoped and quoted individually.</p>
+      </div>
+      <div class="eng-grid reveal">
+        <div class="eng-card">
+          <div class="kicker mono">internal tooling</div>
+          <h4>Operations dashboards</h4>
+          <p>Replacing spreadsheets and manual reporting with a single internal tool built around how your team actually works.</p>
+        </div>
+        <div class="eng-card">
+          <div class="kicker mono">greenfield saas</div>
+          <h4>Zero-to-one products</h4>
+          <p>Taking a SaaS idea from architecture through a paying-customer-ready first release, with billing and auth handled from day one.</p>
+        </div>
+        <div class="eng-card">
+          <div class="kicker mono">web platform</div>
+          <h4>Marketing sites &amp; portals</h4>
+          <p>Fast, accessible sites and client portals built on real infrastructure — not a page builder held together with plugins.</p>
+        </div>
+        <div class="eng-card">
+          <div class="kicker mono">mobile</div>
+          <h4>Companion apps</h4>
+          <p>iOS and Android apps built to extend an existing web product, sharing the same backend and business logic.</p>
+        </div>
+        <div class="eng-card">
+          <div class="kicker mono">integration</div>
+          <h4>System integrations</h4>
+          <p>Connecting the tools you already run — payments, CRM, scheduling — into one working pipeline instead of manual exports.</p>
+        </div>
+        <div class="eng-card">
+          <div class="kicker mono">modernization</div>
+          <h4>Legacy rebuilds</h4>
+          <p>Rebuilding an aging system on a modern stack without a "big bang" rewrite that puts the business on hold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CTA BAND -->
+  <section>
+    <div class="wrap">
+      <div class="cta-band reveal">
+        <div>
+          <h3>Have a project worth building properly<span class="dot">.</span></h3>
+          <p>Tell me what you're trying to build — I'll tell you honestly whether it's a fit.</p>
+        </div>
+        <a href="#contact" class="btn btn-primary">Start a project →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Contact</div>
+        <h2>Let's talk about it</h2>
+        <p>Send a short brief — what you're building, roughly when, and what "done" looks like. Every message is read and answered by Anthony directly.</p>
+      </div>
+
+      <div class="contact-grid reveal">
+        <form id="contactForm">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required placeholder="Your full name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="you@company.com">
+          </div>
+          <div class="field">
+            <label for="project">Project type</label>
+            <select id="project" name="project">
+              <option>Custom Software</option>
+              <option>Web</option>
+              <option>SaaS</option>
+              <option>Mobile</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Project brief</label>
+            <textarea id="message" name="message" required placeholder="What are you building, and what does success look like?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send brief →</button>
+          <div class="form-status" id="formStatus" role="status"></div>
+        </form>
+
+        <div class="contact-side">
+          <h4>Direct</h4>
+          <div class="contact-line"><div class="k mono">Email</div><div class="v">hello@dinunziodotdev.ca</div></div>
+          <div class="contact-line"><div class="k mono">Location</div><div class="v">Edmonton, AB, Canada</div></div>
+          <div class="contact-line"><div class="k mono">Founder</div><div class="v">Anthony Tyler-Scott Dinunzio</div></div>
+          <div class="contact-line"><div class="k mono">Response</div><div class="v">Within 1–2 business days</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="mono">© <span id="year"></span> DinunzioDotDev. Edmonton, AB, Canada.</div>
+    <div class="foot-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+      <a href="mailto:hello@dinunziodotdev.ca">hello@dinunziodotdev.ca</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // terminal typing effect
+  const termBody = document.getElementById('termBody');
+  const lines = [
+    { p: '$ ', c: 'whoami', out: false },
+    { p: '', c: 'anthony-tyler-scott-dinunzio', out: true },
+    { p: '', c: '', out: false },
+    { p: '$ ', c: 'cat role.txt', out: false },
+    { p: '', c: 'Founder & Lead Senior Engineer', out: true },
+    { p: '', c: '', out: false },
+    { p: '$ ', c: 'cat location.txt', out: false },
+    { p: '', c: 'Edmonton, AB · Canada', out: true },
+    { p: '', c: '', out: false },
+    { p: '$ ', c: 'cat experience.txt', out: false },
+    { p: '', c: '8 years — production software', out: true },
+    { p: '', c: '', out: false },
+    { p: '$ ', c: './services --list', out: false },
+    { p: '', c: '  custom-software', out: true },
+    { p: '', c: '  web', out: true },
+    { p: '', c: '  saas', out: true },
+    { p: '', c: '  mobile', out: true },
+    { p: '', c: '', out: false },
+    { p: '$ ', c: 'status', out: false },
+    { p: '', c: 'listening for new projects', out: true, cursor: true }
+  ];
+
+  function renderStatic() {
+    termBody.innerHTML = lines.map(l => {
+      const cls = l.out ? 'out' : 'prompt';
+      const promptSpan = l.p ? `<span class="prompt">${l.p}</span>` : '';
+      const cursor = l.cursor ? '<span class="cursor">&nbsp;</span>' : '';
+      return `<div><span class="${cls}">${promptSpan}${l.c}</span>${cursor}</div>`;
+    }).join('');
+  }
+
+  async function typeTerminal() {
+    if (reduceMotion) { renderStatic(); return; }
+    termBody.innerHTML = '';
+    for (const line of lines) {
+      const div = document.createElement('div');
+      const promptSpan = document.createElement('span');
+      promptSpan.className = line.out ? 'out' : 'prompt';
+      div.appendChild(promptSpan);
+      termBody.appendChild(div);
+
+      const full = (line.p || '') + line.c;
+      if (!full) { await sleep(90); continue; }
+
+      let shown = '';
+      const speed = line.out ? 12 : 28;
+      for (let i = 0; i < full.length; i++) {
+        shown += full[i];
+        promptSpan.textContent = shown;
+        await sleep(speed);
+      }
+      if (line.cursor) {
+        const cur = document.createElement('span');
+        cur.className = 'cursor';
+        cur.innerHTML = '&nbsp;';
+        div.appendChild(cur);
+      }
+      await sleep(line.out ? 60 : 140);
+      termBody.scrollTop = termBody.scrollHeight;
+    }
+  }
+  function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+  const termIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        typeTerminal();
+        termIO.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  termIO.observe(document.getElementById('termWrap'));
+
+  // contact form -> mailto
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const project = form.project.value;
+    const message = form.message.value.trim();
+
+    const subject = encodeURIComponent(`New project brief: ${project} — ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nProject type: ${project}\n\n${message}`
+    );
+    window.location.href = `mailto:hello@dinunziodotdev.ca?subject=${subject}&body=${body}`;
+    status.textContent = 'Opening your email client to send this brief…';
+  });
+</script>
 
 </body>
-
 </html>
