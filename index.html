@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>DinunzioDotDev | Enterprise Software Engineering & Digital Architecture</title>
+    <meta name="title" content="DinunzioDotDev | Enterprise Software Engineering & Digital Architecture">
+    <meta name="description" content="DinunzioDotDev architects and engineers secure, scalable SaaS platforms, distributed cloud systems, and bespoke web applications built for infinite scale.">
+    <meta name="keywords" content="Software Architecture, SaaS Development, Cloud Engineering, Full-Stack Development, React, Python, Enterprise Solutions">
+    <meta name="author" content="DinunzioDotDev">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dinunziodotdev.ca/">
+    <meta property="og:title" content="DinunzioDotDev | Enterprise Software Engineering">
+    <meta property="og:description" content="Architecting digital foundations behind modern SaaS platforms and cloud infrastructure.">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dinunziodotdev.ca/">
+    <meta property="twitter:title" content="DinunzioDotDev | Enterprise Software Engineering">
+    <meta property="twitter:description" content="Architecting digital foundations behind modern SaaS platforms and cloud infrastructure.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/script.js"></script>
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS & ROOT VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-black: #050505;
+            --bg-surface: #0a0a0f;
+            --bg-card: rgba(18, 18, 26, 0.65);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(37, 99, 235, 0.4);
+
+            --accent-blue: #2563EB;
+            --accent-purple: #7C3AED;
+            --accent-cyan: #06B6D4;
+
+            --text-heading: #FFFFFF;
+            --text-body: #94A3B8;
+            --text-muted: #64748B;
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --transition-fast: 0.2s ease;
+            --transition-base: 0.35s ease;
+            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-black);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* Scroll Reveal Fallback */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-card);
+            transition: background 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover {
+            color: var(--accent-blue);
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width var(--transition-fast);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--text-heading);
+        }
+
+        .nav-cta {
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid var(--accent-blue);
+            color: var(--text-heading) !important;
+            transition: all var(--transition-fast) !important;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-blue);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-heading);
+            font-size: 1.5rem;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: var(--transition-fast);
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* ==========================================================================
+           HERO SECTION
+           ========================================================================== */
+        .hero {
+            position: relative;
+            padding: 9rem 0 5rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 4rem 4rem;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+        }
+
+        .glow-blue {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            animation: drift-slow 8s ease-in-out infinite;
+        }
+
+        .glow-purple {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            animation: drift-fast 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes drift-fast {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #60A5FA;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: fade-in 0.6s ease-out;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #60A5FA;
+            box-shadow: 0 0 8px #60A5FA;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.25rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: var(--text-heading);
+            margin-bottom: 1.25rem;
+            animation: fade-in 0.7s ease-out 0.1s both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 30%, #93C5FD 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-body);
+            margin-bottom: 2.25rem;
+            line-height: 1.7;
+            animation: fade-in 0.7s ease-out 0.2s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            animation: fade-in 0.7s ease-out 0.3s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn.primary:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-heading);
+            border: 1px solid var(--border-card);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Terminal Graphic */
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+        }
+
+        .terminal-card {
+            background: rgba(10, 10, 15, 0.85);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            animation: fade-in 0.8s ease-out 0.4s both;
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #EF4444; }
+        .dot.yellow { background: #F59E0B; }
+        .dot.green { background: #10B981; }
+
+        .terminal-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .terminal-body {
+            padding: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.825rem;
+            color: #E2E8F0;
+            line-height: 1.7;
+        }
+
+        .code-keyword { color: #F472B6; }
+        .code-func { color: #60A5FA; }
+        .code-string { color: #34D399; }
+        .code-comment { color: var(--text-muted); }
+
+        /* ==========================================================================
+           TRUST METRICS
+           ========================================================================== */
+        .trust-strip {
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border-card);
+            border-bottom: 1px solid var(--border-card);
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .trust-item {
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .trust-item:nth-child(1) { animation-delay: 0s; }
+        .trust-item:nth-child(2) { animation-delay: 0.1s; }
+        .trust-item:nth-child(3) { animation-delay: 0.2s; }
+        .trust-item:nth-child(4) { animation-delay: 0.3s; }
+
+        .trust-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ==========================================================================
+           SECTIONS & CARDS
+           ========================================================================== */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            max-width: 650px;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-description {
+            color: var(--text-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all var(--transition-slow);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0s; }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60A5FA;
+            margin-bottom: 1.25rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--text-heading);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+
+        .card-link {
+            color: #60A5FA;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: gap var(--transition-fast);
+        }
+
+        .card-link:hover {
+            gap: 0.6rem;
+        }
+
+        /* ==========================================================================
+           CTA SECTION
+           ========================================================================== */
+        .cta-banner {
+            background: linear-gradient(180deg, rgba(18, 18, 26, 0.4) 0%, rgba(37, 99, 235, 0.1) 100%);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fade-in 0.8s ease-out;
+        }
+
+        .cta-banner h2 {
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .cta-banner p {
+            max-width: 550px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .footer {
+            border-top: 1px solid var(--border-card);
+            padding: 4rem 0 2rem;
+            background: #020203;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            color: var(--text-heading);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 280px;
+        }
+
+        .footer-links-column h4 {
+            color: var(--text-heading);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links-column a:hover {
+            color: var(--text-heading);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (min-width: 992px) {
+            .hero {
+                display: grid;
+                grid-template-columns: 1.15fr 0.85fr;
+                gap: 3.5rem;
+            }
+
+            .hero-content {
+                grid-column: 1;
+            }
+
+            .hero-visual {
+                grid-column: 2;
+                grid-row: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border-card);
+                flex-direction: column;
+                padding: 2rem;
+                display: none;
+                max-height: calc(100vh - 72px);
+                overflow-y: auto;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .terminal-card {
+                display: none;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus States for Accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+    <header class="header">
+        <nav class="navbar container" aria-label="Main Navigation">
+            <a href="index.html" class="logo" aria-label="DinunzioDotDev Home">
+                Dinunzio<span>.dev</span>
+            </a>
+
+            <button class="nav-toggle" id="navToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav" id="primary-nav">
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="nav-cta">Start Project</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- =========================
+             HERO SECTION
+        ========================= -->
+        <section class="hero">
+            <div class="hero-background" aria-hidden="true">
+                <div class="hero-grid"></div>
+                <div class="glow-blue"></div>
+                <div class="glow-purple"></div>
+            </div>
+
+            <!-- Left Column -->
+            <div class="hero-content">
+                <div class="badge-pill">
+                    <span class="badge-dot"></span>
+                    Engineering Next-Gen Platforms
+                </div>
+
+                <h1>
+                    Architecting Digital<br>
+                    <span class="gradient-text">Systems That Scale</span>
+                </h1>
+
+                <p class="hero-description">
+                    DinunzioDotDev is an enterprise software studio specializing in high-throughput backend architecture, resilient cloud infrastructure, and bespoke SaaS engineering for organizations demanding precision and performance.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="contact.html" class="btn primary">
+                        Initiate Project
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="about.html" class="btn secondary">Explore Capabilities</a>
+                </div>
+            </div>
+
+            <!-- Right Column: Terminal Visual -->
+            <div class="hero-visual">
+                <div class="terminal-card">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-title">architecture_config.ts</div>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="code-comment">// High-Scale Enterprise Core</span></p>
+                        <p><span class="code-keyword">import</span> { PlatformEngine } <span class="code-keyword">from</span> <span class="code-string">'@dinunzio/core'</span>;</p>
+                        <br>
+                        <p><span class="code-keyword">export const</span> <span class="code-func">config</span> = {</p>
+                        <p>&nbsp;&nbsp;security: <span class="code-string">'Zero-Trust'</span>,</p>
+                        <p>&nbsp;&nbsp;infrastructure: <span class="code-string">'Distributed'</span>,</p>
+                        <p>&nbsp;&nbsp;database: <span class="code-string">'PostgreSQL/Redis'</span>,</p>
+                        <p>&nbsp;&nbsp;uptime: <span class="code-string">'99.99% SLA'</span></p>
+                        <p>};</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             TRUST & PROOF
+        ========================= -->
+        <section class="trust-strip">
+            <div class="container">
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <div class="trust-number">99.99%</div>
+                        <div class="trust-label">Target Uptime SLA</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-number">Zero-Trust</div>
+                        <div class="trust-label">Security Architecture</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-number">&lt;100ms</div>
+                        <div class="trust-label">Global Latency</div>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-number">Full-Stack</div>
+                        <div class="trust-label">Engineering Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             CORE CAPABILITIES
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge-pill">ENGINEERING PILLARS</span>
+                    <h2 class="section-title">Built for Performance, Security & Longevity</h2>
+                    <p class="section-description">
+                        We architect resilient digital infrastructure tailored to support your organization's long-term business goals with technical precision and strategic foresight.
+                    </p>
+                </div>
+
+                <div class="cards-grid">
+
+                    <article class="card reveal">
+                        <div class="card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <h3>SaaS Platform Architecture</h3>
+                        <p>End-to-end multi-tenant applications engineered for rapid growth, complete data isolation, and seamless automated billing orchestration.</p>
+                        <a href="services.html" class="card-link">Learn More &rarr;</a>
+                    </article>
+
+                    <article class="card reveal">
+                        <div class="card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h3>Backend & Security Engineering</h3>
+                        <p>Robust distributed APIs, cloud-native design patterns, and database optimization backed by zero-trust security and enterprise encryption.</p>
+                        <a href="services.html" class="card-link">Learn More &rarr;</a>
+                    </article>
+
+                    <article class="card reveal">
+                        <div class="card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>High-Performance Web Applications</h3>
+                        <p>Lightning-fast reactive interfaces with React, modern state management, and edge-optimized delivery pipelines for global performance.</p>
+                        <a href="services.html" class="card-link">Learn More &rarr;</a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             CALL TO ACTION
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-banner reveal">
+                    <span class="badge-pill">NEXT STEPS</span>
+                    <h2 class="section-title">Ready to Build Infrastructure Designed for the Future?</h2>
+                    <p class="section-description">
+                        Whether launching a sophisticated SaaS product or modernizing legacy systems, let's transform your vision into production-ready reality.
+                    </p>
+                    <a href="contact.html" class="btn primary">
+                        Schedule Technical Consultation
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+                        Dinunzio<span>.dev</span>
+                    </a>
+                    <p>Enterprise software solutions engineered for performance, security, and infinite scalability.</p>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4>Expertise</h4>
+                    <ul>
+                        <li><a href="services.html">SaaS Platforms</a></li>
+                        <li><a href="services.html">Cloud Architecture</a></li>
+                        <li><a href="services.html">Full-Stack Development</a></li>
+                        <li><a href="services.html">Security Systems</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 DinunzioDotDev. All Rights Reserved.</p>
+                <p>Engineered with Precision & Integrity</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Navigation Toggle
+            const toggleBtn = document.getElementById('navToggleBtn');
+            const primaryNav = document.getElementById('primary-nav');
+
+            if (toggleBtn && primaryNav) {
+                toggleBtn.addEventListener('click', () => {
+                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                    toggleBtn.setAttribute('aria-expanded', !isExpanded);
+                    toggleBtn.classList.toggle('active');
+                    primaryNav.classList.toggle('open');
+                });
+
+                // Close menu when link is clicked
+                primaryNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                        toggleBtn.classList.remove('active');
+                        primaryNav.classList.remove('open');
+                    });
+                });
+            }
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for reveal animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => observer.observe(element));
+        });
+    </script>
+
+</body>
+
+</html>

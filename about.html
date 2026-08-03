@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>About DinunzioDotDev | Enterprise Software Engineering Studio</title>
+    <meta name="title" content="About DinunzioDotDev | Enterprise Software Engineering">
+    <meta name="description" content="Learn about DinunzioDotDev's mission, values, and expertise in enterprise software architecture, SaaS development, and cloud engineering led by Anthony Dinunzio.">
+    <meta name="keywords" content="Software Architecture, SaaS Development, Anthony Dinunzio, Cloud Engineering, Enterprise Solutions">
+    <meta name="author" content="DinunzioDotDev">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dinunziodotdev.ca/about.html">
+    <meta property="og:title" content="About DinunzioDotDev | Enterprise Software Engineering">
+    <meta property="og:description" content="Enterprise software studio specializing in SaaS platforms, cloud architecture, and high-performance web applications.">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dinunziodotdev.ca/about.html">
+    <meta property="twitter:title" content="About DinunzioDotDev | Enterprise Software Engineering">
+    <meta property="twitter:description" content="Enterprise software studio specializing in SaaS platforms, cloud architecture, and high-performance web applications.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/script.js"></script>
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS & ROOT VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-black: #050505;
+            --bg-surface: #0a0a0f;
+            --bg-card: rgba(18, 18, 26, 0.65);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(37, 99, 235, 0.4);
+
+            --accent-blue: #2563EB;
+            --accent-purple: #7C3AED;
+            --accent-cyan: #06B6D4;
+
+            --text-heading: #FFFFFF;
+            --text-body: #94A3B8;
+            --text-muted: #64748B;
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --transition-fast: 0.2s ease;
+            --transition-base: 0.35s ease;
+            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-black);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* Scroll Reveal Fallback */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-card);
+            transition: background 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover {
+            color: var(--accent-blue);
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width var(--transition-fast);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--text-heading);
+        }
+
+        .nav-cta {
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid var(--accent-blue);
+            color: var(--text-heading) !important;
+            transition: all var(--transition-fast) !important;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-blue);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-heading);
+            font-size: 1.5rem;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: var(--transition-fast);
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* ==========================================================================
+           PAGE HERO SECTION
+           ========================================================================== */
+        .page-hero {
+            position: relative;
+            padding: 9rem 0 5rem;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 4rem 4rem;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+        }
+
+        .glow-blue {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            animation: drift-slow 8s ease-in-out infinite;
+        }
+
+        .glow-purple {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            animation: drift-fast 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes drift-fast {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #60A5FA;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: fade-in 0.6s ease-out;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #60A5FA;
+            box-shadow: 0 0 8px #60A5FA;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.25rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: var(--text-heading);
+            margin-bottom: 1.25rem;
+            animation: fade-in 0.7s ease-out 0.1s both;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 0.75rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 30%, #93C5FD 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-body);
+            max-width: 700px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            animation: fade-in 0.7s ease-out 0.2s both;
+        }
+
+        /* ==========================================================================
+           SECTIONS & SPACING
+           ========================================================================== */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            max-width: 750px;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-description {
+            color: var(--text-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        .section.alternate {
+            background: rgba(10, 10, 15, 0.5);
+            border-top: 1px solid var(--border-card);
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        /* ==========================================================================
+           STORY SECTION
+           ========================================================================== */
+        .story-content {
+            max-width: 800px;
+        }
+
+        .story-content p {
+            color: var(--text-body);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .story-content p:nth-child(1) { animation-delay: 0s; }
+        .story-content p:nth-child(2) { animation-delay: 0.1s; }
+        .story-content p:nth-child(3) { animation-delay: 0.2s; }
+
+        /* ==========================================================================
+           FOUNDER SECTION
+           ========================================================================== */
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        @media (min-width: 992px) {
+            .founder-grid {
+                grid-template-columns: 1fr 1.2fr;
+            }
+        }
+
+        .founder-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .founder-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--bg-black), var(--bg-black)) padding-box,
+                        linear-gradient(135deg, var(--accent-blue), var(--accent-purple)) border-box;
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.25);
+            animation: fade-in 0.8s ease-out 0.2s both;
+        }
+
+        .founder-image:hover {
+            transform: scale(1.02);
+            transition: transform var(--transition-base);
+        }
+
+        .founder-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder-content h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #60A5FA;
+            margin-bottom: 1.5rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-mono);
+        }
+
+        .founder-content p {
+            color: var(--text-body);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .founder-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            padding: 0.65rem 1.25rem;
+            border: 1px solid var(--border-card);
+            border-radius: 8px;
+            color: var(--text-heading);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all var(--transition-base);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent-blue);
+            background: rgba(37, 99, 235, 0.1);
+            color: #60A5FA;
+        }
+
+        /* ==========================================================================
+           VALUES & PHILOSOPHY
+           ========================================================================== */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .value-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .value-card:nth-child(1) { animation-delay: 0s; }
+        .value-card:nth-child(2) { animation-delay: 0.1s; }
+        .value-card:nth-child(3) { animation-delay: 0.2s; }
+        .value-card:nth-child(4) { animation-delay: 0.3s; }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .value-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: #60A5FA;
+            font-size: 1.2rem;
+        }
+
+        .value-card h3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .value-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+           TECHNOLOGY SECTION
+           ========================================================================== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .tech-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all var(--transition-slow);
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .tech-category:nth-child(1) { animation-delay: 0s; }
+        .tech-category:nth-child(2) { animation-delay: 0.1s; }
+        .tech-category:nth-child(3) { animation-delay: 0.2s; }
+        .tech-category:nth-child(4) { animation-delay: 0.3s; }
+
+        .tech-category:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tech-category h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #60A5FA;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           CTA SECTION
+           ========================================================================== */
+        .cta-banner {
+            background: linear-gradient(180deg, rgba(18, 18, 26, 0.4) 0%, rgba(37, 99, 235, 0.1) 100%);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fade-in 0.8s ease-out;
+        }
+
+        .cta-banner h2 {
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .cta-banner p {
+            max-width: 550px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .footer {
+            border-top: 1px solid var(--border-card);
+            padding: 4rem 0 2rem;
+            background: #020203;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            color: var(--text-heading);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 280px;
+        }
+
+        .footer-links-column h4 {
+            color: var(--text-heading);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links-column a:hover {
+            color: var(--text-heading);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border-card);
+                flex-direction: column;
+                padding: 2rem;
+                display: none;
+                max-height: calc(100vh - 72px);
+                overflow-y: auto;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .founder-image-container {
+                max-width: 280px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus States for Accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+    <header class="header">
+        <nav class="navbar container" aria-label="Main Navigation">
+            <a href="index.html" class="logo" aria-label="DinunzioDotDev Home">
+                Dinunzio<span>.dev</span>
+            </a>
+
+            <button class="nav-toggle" id="navToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav" id="primary-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active" aria-current="page">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="nav-cta">Start Project</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- =========================
+             HERO SECTION
+        ========================= -->
+        <section class="page-hero">
+            <div class="hero-background" aria-hidden="true">
+                <div class="hero-grid"></div>
+                <div class="glow-blue"></div>
+                <div class="glow-purple"></div>
+            </div>
+
+            <div class="container">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <span class="badge-dot"></span>
+                        About Our Studio
+                    </div>
+
+                    <h1>
+                        Engineering Technology<br>
+                        <span class="gradient-text">With Purpose</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        We design and develop secure, scalable, and intelligent software solutions that help organizations transform ambitious ideas into powerful digital experiences built to endure.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             STORY SECTION
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Story</h2>
+                    <p class="section-description">
+                        Founded on the principle that exceptional software begins with understanding both the technology and the people it serves.
+                    </p>
+                </div>
+
+                <article class="story-content">
+                    <p>
+                        DinunzioDotDev was created with a singular vision: to build technology that is not only functional, but genuinely meaningful. We recognized that modern organizations face unprecedented complexity—managing distributed systems, scaling infrastructure, and delivering experiences that matter to their users.
+                    </p>
+
+                    <p>
+                        Today's competitive landscape demands more than competent engineering. It demands partners who understand your business objectives, architect solutions with longevity in mind, and execute with precision. We help transform complex ideas into reliable digital systems through thoughtful architecture, modern technology practices, and an unwavering commitment to quality.
+                    </p>
+
+                    <p>
+                        From initial strategic planning and system design through development, deployment, and ongoing optimization, every solution is engineered with scalability, security, and sustainable growth as foundational principles. We don't just write code—we architect digital infrastructure designed to support your organization's long-term success.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- =========================
+             FOUNDER SECTION
+        ========================= -->
+        <section class="section alternate">
+            <div class="container">
+                <div class="founder-grid reveal">
+
+                    <div class="founder-image-container">
+                        <img
+                            src="assets/images/founder.jpg"
+                            alt="Anthony Dinunzio, Founder and Lead Software Engineer at DinunzioDotDev"
+                            class="founder-image"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <article class="founder-content">
+                        <span class="badge-pill">
+                            <span class="badge-dot"></span>
+                            Founder
+                        </span>
+
+                        <h2>Anthony Dinunzio</h2>
+                        <span class="founder-title">Founder & Lead Software Engineer</span>
+
+                        <p>
+                            With eight years of self-taught engineering experience, Anthony has built the technical foundation and business acumen to architect enterprise-grade solutions. His expertise spans full-stack software engineering, distributed backend systems, SaaS platform development, and modern cloud architecture.
+                        </p>
+
+                        <p>
+                            Anthony's philosophy centers on creating dependable software solutions that seamlessly integrate technical excellence with real-world business value. He approaches every project as an opportunity to solve meaningful problems through creative thinking, rigorous engineering discipline, and strategic foresight. His background includes designing systems for Oil & Gas sector compliance, building game engines, developing learning management platforms, and architecting high-performance web applications.
+                        </p>
+
+                        <p>
+                            Beyond software engineering, Anthony maintains a creative practice spanning game design, music production, and narrative development—interests that directly inform his approach to user experience and software design thinking.
+                        </p>
+
+                        <div class="founder-links">
+                            <a href="https://linkedin.com/in/anthonydinunzio" class="social-link" target="_blank" rel="noopener noreferrer">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                                LinkedIn
+                            </a>
+                            <a href="https://github.com/anthonydinunzio" class="social-link" target="_blank" rel="noopener noreferrer">
+                                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             VALUES & PHILOSOPHY
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Engineering Philosophy</h2>
+                    <p class="section-description">
+                        The core principles that guide every project, every decision, and every line of code we write.
+                    </p>
+                </div>
+
+                <div class="values-grid">
+
+                    <article class="value-card">
+                        <div class="value-icon">◇</div>
+                        <h3>Integrity</h3>
+                        <p>Building honest, transparent partnerships through clear communication and delivering solutions that genuinely solve the problems you face.</p>
+                    </article>
+
+                    <article class="value-card">
+                        <div class="value-icon">⚡</div>
+                        <h3>Innovation</h3>
+                        <p>Leveraging modern technologies and creative problem-solving to architect solutions that don't just work today, but scale for tomorrow.</p>
+                    </article>
+
+                    <article class="value-card">
+                        <div class="value-icon">🔐</div>
+                        <h3>Security</h3>
+                        <p>Designing software with zero-trust principles, encryption standards, and protection as foundational architectural requirements, not afterthoughts.</p>
+                    </article>
+
+                    <article class="value-card">
+                        <div class="value-icon">✓</div>
+                        <h3>Trust</h3>
+                        <p>Delivering measurable value through accountability, engineering excellence, and the confidence that comes from working with professionals who understand stakes.</p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             TECHNOLOGY EXPERTISE
+        ========================= -->
+        <section class="section alternate">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technology Expertise</h2>
+                    <p class="section-description">
+                        Modern tools and architectural patterns used to create reliable, high-performance digital products built for scale.
+                    </p>
+                </div>
+
+                <div class="tech-grid">
+
+                    <div class="tech-category reveal">
+                        <h4>Frontend Development</h4>
+                        <p class="tech-stack">React • TypeScript • JavaScript • HTML • CSS • Responsive Design • Modern State Management</p>
+                    </div>
+
+                    <div class="tech-category reveal">
+                        <h4>Backend Engineering</h4>
+                        <p class="tech-stack">Python • Flask • .NET • Node.js • REST APIs • Microservices • Distributed Systems</p>
+                    </div>
+
+                    <div class="tech-category reveal">
+                        <h4>Databases & Infrastructure</h4>
+                        <p class="tech-stack">PostgreSQL • MySQL • Redis • Cloud Architecture • DevOps • Container Orchestration</p>
+                    </div>
+
+                    <div class="tech-category reveal">
+                        <h4>Mobile Development</h4>
+                        <p class="tech-stack">Android • Kotlin • Java • React Native • Cross-Platform Solutions</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             CALL TO ACTION
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-banner reveal">
+                    <span class="badge-pill">
+                        <span class="badge-dot"></span>
+                        Ready to Build?
+                    </span>
+                    <h2>Let's Build Something Exceptional Together</h2>
+                    <p class="section-description">
+                        Whether you're launching a sophisticated SaaS product or modernizing legacy infrastructure, we're here to architect solutions designed for long-term success and infinite scale.
+                    </p>
+                    <a href="contact.html" class="btn primary">
+                        Schedule Technical Consultation
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+                        Dinunzio<span>.dev</span>
+                    </a>
+                    <p>Enterprise software solutions engineered for performance, security, and infinite scalability.</p>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4>Expertise</h4>
+                    <ul>
+                        <li><a href="services.html">SaaS Platforms</a></li>
+                        <li><a href="services.html">Cloud Architecture</a></li>
+                        <li><a href="services.html">Full-Stack Development</a></li>
+                        <li><a href="services.html">Security Systems</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 DinunzioDotDev. All Rights Reserved.</p>
+                <p>Engineered with Precision & Integrity</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Navigation Toggle
+            const toggleBtn = document.getElementById('navToggleBtn');
+            const primaryNav = document.getElementById('primary-nav');
+
+            if (toggleBtn && primaryNav) {
+                toggleBtn.addEventListener('click', () => {
+                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                    toggleBtn.setAttribute('aria-expanded', !isExpanded);
+                    toggleBtn.classList.toggle('active');
+                    primaryNav.classList.toggle('open');
+                });
+
+                // Close menu when link is clicked
+                primaryNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                        toggleBtn.classList.remove('active');
+                        primaryNav.classList.remove('open');
+                    });
+                });
+            }
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for reveal animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => observer.observe(element));
+        });
+    </script>
+
+</body>
+
+</html>

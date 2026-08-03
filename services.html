@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Services | DinunzioDotDev | Enterprise Software Engineering Solutions</title>
+    <meta name="title" content="Services | DinunzioDotDev | Enterprise Software Engineering">
+    <meta name="description" content="SaaS platform development, backend architecture, cloud infrastructure, full-stack web applications, and custom software solutions for enterprise organizations.">
+    <meta name="keywords" content="SaaS Development, Cloud Architecture, Backend Engineering, Full-Stack Development, Software Solutions, Enterprise Services">
+    <meta name="author" content="DinunzioDotDev">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dinunziodotdev.ca/services.html">
+    <meta property="og:title" content="Services | DinunzioDotDev | Enterprise Software Solutions">
+    <meta property="og:description" content="Custom SaaS platforms, cloud architecture, backend systems, and high-performance web applications.">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dinunziodotdev.ca/services.html">
+    <meta property="twitter:title" content="Services | DinunzioDotDev">
+    <meta property="twitter:description" content="Enterprise software engineering and custom development services.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="assets/js/script.js"></script>
+
+    <style>
+        /* ==========================================================================
+           DESIGN TOKENS & ROOT VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-black: #050505;
+            --bg-surface: #0a0a0f;
+            --bg-card: rgba(18, 18, 26, 0.65);
+            --border-card: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(37, 99, 235, 0.4);
+
+            --accent-blue: #2563EB;
+            --accent-purple: #7C3AED;
+            --accent-cyan: #06B6D4;
+
+            --text-heading: #FFFFFF;
+            --text-body: #94A3B8;
+            --text-muted: #64748B;
+
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --transition-fast: 0.2s ease;
+            --transition-base: 0.35s ease;
+            --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-black);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        /* Scroll Reveal Fallback */
+        .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        /* ==========================================================================
+           HEADER & NAVIGATION
+           ========================================================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-card);
+            transition: background 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: var(--transition-fast);
+        }
+
+        .logo:hover {
+            color: var(--accent-blue);
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width var(--transition-fast);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: var(--text-heading);
+        }
+
+        .nav-cta {
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid var(--accent-blue);
+            color: var(--text-heading) !important;
+            transition: all var(--transition-fast) !important;
+            font-weight: 600;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-blue);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-heading);
+            font-size: 1.5rem;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            border-radius: 2px;
+            transition: var(--transition-fast);
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* ==========================================================================
+           PAGE HERO SECTION
+           ========================================================================== */
+        .page-hero {
+            position: relative;
+            padding: 9rem 0 5rem;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 4rem 4rem;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+        }
+
+        .glow-blue {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            animation: drift-slow 8s ease-in-out infinite;
+        }
+
+        .glow-purple {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            animation: drift-fast 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes drift-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        @keyframes drift-fast {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #60A5FA;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            animation: fade-in 0.6s ease-out;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #60A5FA;
+            box-shadow: 0 0 8px #60A5FA;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.25rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: var(--text-heading);
+            margin-bottom: 1.25rem;
+            animation: fade-in 0.7s ease-out 0.1s both;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 0.75rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 30%, #93C5FD 70%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-body);
+            max-width: 700px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            animation: fade-in 0.7s ease-out 0.2s both;
+        }
+
+        /* ==========================================================================
+           SECTIONS & SPACING
+           ========================================================================== */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            max-width: 750px;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-description {
+            color: var(--text-body);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        .section.alternate {
+            background: rgba(10, 10, 15, 0.5);
+            border-top: 1px solid var(--border-card);
+            border-bottom: 1px solid var(--border-card);
+        }
+
+        /* ==========================================================================
+           SERVICE OFFERINGS GRID
+           ========================================================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all var(--transition-slow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0s; }
+        .service-card:nth-child(2) { animation-delay: 0.1s; }
+        .service-card:nth-child(3) { animation-delay: 0.2s; }
+        .service-card:nth-child(4) { animation-delay: 0.3s; }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .service-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 1.5rem 0 1.5rem 0;
+            padding-left: 0;
+        }
+
+        .service-features li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: #60A5FA;
+            font-weight: 700;
+            min-width: 18px;
+        }
+
+        .service-link {
+            color: #60A5FA;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap var(--transition-fast);
+            margin-top: auto;
+        }
+
+        .service-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* ==========================================================================
+           PROCESS SECTION
+           ========================================================================== */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .process-step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all var(--transition-slow);
+            position: relative;
+            text-align: center;
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .process-step:nth-child(1) { animation-delay: 0s; }
+        .process-step:nth-child(2) { animation-delay: 0.1s; }
+        .process-step:nth-child(3) { animation-delay: 0.2s; }
+        .process-step:nth-child(4) { animation-delay: 0.3s; }
+
+        .process-step:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .process-number {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .process-step p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+           TECHNOLOGY STACK SECTION
+           ========================================================================== */
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .tech-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all var(--transition-slow);
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .tech-box:nth-child(1) { animation-delay: 0s; }
+        .tech-box:nth-child(2) { animation-delay: 0.1s; }
+        .tech-box:nth-child(3) { animation-delay: 0.2s; }
+        .tech-box:nth-child(4) { animation-delay: 0.3s; }
+        .tech-box:nth-child(5) { animation-delay: 0.4s; }
+        .tech-box:nth-child(6) { animation-delay: 0.5s; }
+
+        .tech-box:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tech-box h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #60A5FA;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           ENGAGEMENT MODELS
+           ========================================================================== */
+        .engagement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .engagement-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-card);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all var(--transition-slow);
+            position: relative;
+            opacity: 0;
+            animation: fade-in 0.6s ease-out forwards;
+        }
+
+        .engagement-card:nth-child(1) { animation-delay: 0s; }
+        .engagement-card:nth-child(2) { animation-delay: 0.1s; }
+        .engagement-card:nth-child(3) { animation-delay: 0.2s; }
+
+        .engagement-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.25);
+        }
+
+        .engagement-card.featured {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 40px -10px rgba(37, 99, 235, 0.3);
+        }
+
+        .engagement-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .engagement-subtitle {
+            color: #60A5FA;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .engagement-card p {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .engagement-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .engagement-features li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .engagement-features li::before {
+            content: '→';
+            color: #60A5FA;
+            font-weight: 700;
+            min-width: 18px;
+        }
+
+        /* ==========================================================================
+           CTA SECTION
+           ========================================================================== */
+        .cta-banner {
+            background: linear-gradient(180deg, rgba(18, 18, 26, 0.4) 0%, rgba(37, 99, 235, 0.1) 100%);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fade-in 0.8s ease-out;
+        }
+
+        .cta-banner h2 {
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .cta-banner p {
+            max-width: 550px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           FOOTER
+           ========================================================================== */
+        .footer {
+            border-top: 1px solid var(--border-card);
+            padding: 4rem 0 2rem;
+            background: #020203;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            color: var(--text-heading);
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 280px;
+        }
+
+        .footer-links-column h4 {
+            color: var(--text-heading);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-links-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links-column a:hover {
+            color: var(--text-heading);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border-card);
+                flex-direction: column;
+                padding: 2rem;
+                display: none;
+                max-height: calc(100vh - 72px);
+                overflow-y: auto;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-cta {
+                width: 100%;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .services-grid,
+            .process-grid,
+            .tech-stack-grid,
+            .engagement-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus States for Accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+    <header class="header">
+        <nav class="navbar container" aria-label="Main Navigation">
+            <a href="index.html" class="logo" aria-label="DinunzioDotDev Home">
+                Dinunzio<span>.dev</span>
+            </a>
+
+            <button class="nav-toggle" id="navToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav" id="primary-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active" aria-current="page">Services</a></li>
+                <li><a href="contact.html" class="nav-cta">Start Project</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- =========================
+             HERO SECTION
+        ========================= -->
+        <section class="page-hero">
+            <div class="hero-background" aria-hidden="true">
+                <div class="hero-grid"></div>
+                <div class="glow-blue"></div>
+                <div class="glow-purple"></div>
+            </div>
+
+            <div class="container">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <span class="badge-dot"></span>
+                        Our Services
+                    </div>
+
+                    <h1>
+                        End-to-End Software<br>
+                        <span class="gradient-text">Engineering Solutions</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        From architectural strategy to production deployment, we deliver comprehensive software solutions designed for enterprise scale, security, and performance.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             CORE SERVICES
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Core Service Offerings</h2>
+                    <p class="section-description">
+                        Specialized expertise across the full spectrum of software engineering disciplines.
+                    </p>
+                </div>
+
+                <div class="services-grid">
+
+                    <!-- Service 1 -->
+                    <article class="service-card reveal">
+                        <div class="service-number">01</div>
+                        <h3>SaaS Platform Architecture</h3>
+                        <p>
+                            End-to-end design and development of multi-tenant subscription applications optimized for rapid customer acquisition, complete data isolation, and seamless automated billing orchestration.
+                        </p>
+                        <ul class="service-features">
+                            <li>Multi-tenant infrastructure design</li>
+                            <li>Subscription billing integration</li>
+                            <li>Customer onboarding automation</li>
+                            <li>Scalable database architecture</li>
+                            <li>Analytics & reporting systems</li>
+                        </ul>
+                        <a href="contact.html" class="service-link">Learn More &rarr;</a>
+                    </article>
+
+                    <!-- Service 2 -->
+                    <article class="service-card reveal">
+                        <div class="service-number">02</div>
+                        <h3>Backend & Cloud Infrastructure</h3>
+                        <p>
+                            Robust distributed API design, microservices architecture, and cloud-native infrastructure engineered with zero-trust security principles and enterprise-grade redundancy.
+                        </p>
+                        <ul class="service-features">
+                            <li>RESTful & GraphQL API design</li>
+                            <li>Microservices architecture</li>
+                            <li>Database optimization & sharding</li>
+                            <li>Zero-trust security implementation</li>
+                            <li>Disaster recovery & failover</li>
+                        </ul>
+                        <a href="contact.html" class="service-link">Learn More &rarr;</a>
+                    </article>
+
+                    <!-- Service 3 -->
+                    <article class="service-card reveal">
+                        <div class="service-number">03</div>
+                        <h3>High-Performance Web Applications</h3>
+                        <p>
+                            Lightning-fast reactive interfaces built with modern frameworks, optimized state management, and edge-deployed delivery pipelines for global performance excellence.
+                        </p>
+                        <ul class="service-features">
+                            <li>React architecture & patterns</li>
+                            <li>State management solutions</li>
+                            <li>Responsive design implementation</li>
+                            <li>Performance optimization</li>
+                            <li>Accessibility compliance (WCAG)</li>
+                        </ul>
+                        <a href="contact.html" class="service-link">Learn More &rarr;</a>
+                    </article>
+
+                    <!-- Service 4 -->
+                    <article class="service-card reveal">
+                        <div class="service-number">04</div>
+                        <h3>Custom Software Development</h3>
+                        <p>
+                            Bespoke applications tailored to your unique business requirements, from embedded systems and mobile applications to specialized business logic and integration solutions.
+                        </p>
+                        <ul class="service-features">
+                            <li>Custom application development</li>
+                            <li>Legacy system modernization</li>
+                            <li>Third-party integrations</li>
+                            <li>Mobile application development</li>
+                            <li>Technical consulting & strategy</li>
+                        </ul>
+                        <a href="contact.html" class="service-link">Learn More &rarr;</a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             OUR PROCESS
+        ========================= -->
+        <section class="section alternate">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Engineering Process</h2>
+                    <p class="section-description">
+                        A structured, transparent methodology that ensures alignment, quality, and delivery excellence.
+                    </p>
+                </div>
+
+                <div class="process-grid">
+
+                    <div class="process-step reveal">
+                        <div class="process-number">1</div>
+                        <h3>Discovery & Strategy</h3>
+                        <p>
+                            Deep dive into your business objectives, technical requirements, and constraints. We architect a strategic roadmap designed for long-term success.
+                        </p>
+                    </div>
+
+                    <div class="process-step reveal">
+                        <div class="process-number">2</div>
+                        <h3>System Design & Architecture</h3>
+                        <p>
+                            Create detailed technical architecture specifications, database schemas, and API contracts. Every decision documented and validated against requirements.
+                        </p>
+                    </div>
+
+                    <div class="process-step reveal">
+                        <div class="process-number">3</div>
+                        <h3>Development & Implementation</h3>
+                        <p>
+                            Agile development with continuous integration, automated testing, and regular feedback cycles. Transparent progress tracking and milestone delivery.
+                        </p>
+                    </div>
+
+                    <div class="process-step reveal">
+                        <div class="process-number">4</div>
+                        <h3>Testing, Deployment & Support</h3>
+                        <p>
+                            Comprehensive QA, security audits, performance optimization, and production deployment. Ongoing support and maintenance for long-term reliability.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             TECHNOLOGY STACK
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technology Stack Expertise</h2>
+                    <p class="section-description">
+                        Modern tools, frameworks, and architectural patterns chosen strategically for each project.
+                    </p>
+                </div>
+
+                <div class="tech-stack-grid">
+
+                    <div class="tech-box reveal">
+                        <h4>Frontend Development</h4>
+                        <p class="tech-stack">React • TypeScript • JavaScript • Next.js • Tailwind CSS • Modern state management</p>
+                    </div>
+
+                    <div class="tech-box reveal">
+                        <h4>Backend Engineering</h4>
+                        <p class="tech-stack">Python • Flask • Node.js • .NET • RESTful APIs • Microservices • gRPC</p>
+                    </div>
+
+                    <div class="tech-box reveal">
+                        <h4>Databases & Caching</h4>
+                        <p class="tech-stack">PostgreSQL • MySQL • Redis • MongoDB • Database optimization • Sharding strategies</p>
+                    </div>
+
+                    <div class="tech-box reveal">
+                        <h4>Cloud & DevOps</h4>
+                        <p class="tech-stack">AWS • Docker • Kubernetes • CI/CD pipelines • Infrastructure as Code • Monitoring</p>
+                    </div>
+
+                    <div class="tech-box reveal">
+                        <h4>Security & Compliance</h4>
+                        <p class="tech-stack">Zero-Trust architecture • Encryption • OWASP standards • Penetration testing • Compliance audits</p>
+                    </div>
+
+                    <div class="tech-box reveal">
+                        <h4>Mobile Development</h4>
+                        <p class="tech-stack">React Native • Kotlin • Java • Android • Cross-platform solutions</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             ENGAGEMENT MODELS
+        ========================= -->
+        <section class="section alternate">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Engagement Models</h2>
+                    <p class="section-description">
+                        Flexible partnership structures tailored to your needs and timeline.
+                    </p>
+                </div>
+
+                <div class="engagement-grid">
+
+                    <!-- Model 1 -->
+                    <article class="engagement-card reveal">
+                        <div class="engagement-subtitle">Project-Based</div>
+                        <h3>Custom Development</h3>
+                        <p>
+                            Ideal for well-defined projects with clear scope and timeline. Fixed deliverables with transparent milestones.
+                        </p>
+                        <ul class="engagement-features">
+                            <li>Detailed project planning</li>
+                            <li>Fixed scope & timeline</li>
+                            <li>Transparent milestones</li>
+                            <li>Final delivery & documentation</li>
+                            <li>Post-launch support included</li>
+                        </ul>
+                        <a href="contact.html" class="btn primary">Get Started</a>
+                    </article>
+
+                    <!-- Model 2 - Featured -->
+                    <article class="engagement-card featured reveal">
+                        <div class="engagement-subtitle">Recommended</div>
+                        <h3>Team Augmentation</h3>
+                        <p>
+                            Extend your team with specialized engineers. Scale capacity, access expertise, and maintain full integration with your development process.
+                        </p>
+                        <ul class="engagement-features">
+                            <li>Flexible duration engagements</li>
+                            <li>Specialized skill access</li>
+                            <li>Deep team integration</li>
+                            <li>Knowledge transfer & mentoring</li>
+                            <li>Scalable resource allocation</li>
+                        </ul>
+                        <a href="contact.html" class="btn primary">Learn More</a>
+                    </article>
+
+                    <!-- Model 3 -->
+                    <article class="engagement-card reveal">
+                        <div class="engagement-subtitle">Strategic</div>
+                        <h3>Full-Time Partnership</h3>
+                        <p>
+                            Long-term partnership with dedicated resources. Perfect for building complex systems or maintaining growing applications.
+                        </p>
+                        <ul class="engagement-features">
+                            <li>Dedicated engineering team</li>
+                            <li>Product ownership involvement</li>
+                            <li>Long-term commitment</li>
+                            <li>Strategic planning & optimization</li>
+                            <li>Continuous improvement cycles</li>
+                        </ul>
+                        <a href="contact.html" class="btn primary">Explore</a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             CALL TO ACTION
+        ========================= -->
+        <section class="section">
+            <div class="container">
+                <div class="cta-banner reveal">
+                    <span class="badge-pill">
+                        <span class="badge-dot"></span>
+                        Ready to Build?
+                    </span>
+                    <h2>Let's Discuss Your Next Project</h2>
+                    <p class="section-description">
+                        Schedule a technical consultation with our team. We'll discuss your objectives, technical requirements, and how we can accelerate your success.
+                    </p>
+                    <a href="contact.html" class="btn primary">
+                        Schedule Consultation
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+                        Dinunzio<span>.dev</span>
+                    </a>
+                    <p>Enterprise software solutions engineered for performance, security, and infinite scalability.</p>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">SaaS Platforms</a></li>
+                        <li><a href="services.html">Cloud Architecture</a></li>
+                        <li><a href="services.html">Web Applications</a></li>
+                        <li><a href="services.html">Custom Development</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 DinunzioDotDev. All Rights Reserved.</p>
+                <p>Engineered with Precision & Integrity</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Navigation Toggle
+            const toggleBtn = document.getElementById('navToggleBtn');
+            const primaryNav = document.getElementById('primary-nav');
+
+            if (toggleBtn && primaryNav) {
+                toggleBtn.addEventListener('click', () => {
+                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                    toggleBtn.setAttribute('aria-expanded', !isExpanded);
+                    toggleBtn.classList.toggle('active');
+                    primaryNav.classList.toggle('open');
+                });
+
+                // Close menu when link is clicked
+                primaryNav.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                        toggleBtn.classList.remove('active');
+                        primaryNav.classList.remove('open');
+                    });
+                });
+            }
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for reveal animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(element => observer.observe(element));
+        });
+    </script>
+
+</body>
+
+</html>
