@@ -372,7 +372,10 @@
     background:var(--panel-2);
     border-bottom:1px solid var(--line);
   }
-  .terminal-bar .tdot{width:10px; height:10px; border-radius:50%; background:#3a4350;}
+  .terminal-bar .tdot{width:10px; height:10px; border-radius:50%;}
+  .terminal-bar .tdot.green{background:#28c840;}
+  .terminal-bar .tdot.yellow{background:#febc2e;}
+  .terminal-bar .tdot.red{background:#ff5f57;}
   .terminal-bar .label{
     margin-left:8px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--muted);
   }
@@ -384,10 +387,54 @@
     min-height:340px;
     color:#C7CDD6;
     white-space:pre-wrap;
+    overflow:auto;
   }
   .terminal-body .prompt{color:var(--aurora);}
   .terminal-body .out{color:var(--brass-bright);}
   .terminal-body .dim{color:var(--muted);}
+  .terminal-input-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:12px;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .terminal-input-row .prompt{font-family:'IBM Plex Mono', monospace; color:var(--aurora);}
+  .terminal-input{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:var(--text);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.86rem;
+    outline:none;
+    caret-color:var(--brass-bright);
+  }
+  .terminal-input::placeholder{color:#647084;}
+
+  /* ---------- COMPANIES ---------- */
+  .company-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:900px){ .company-grid{grid-template-columns:1fr;} }
+  .company-card{
+    background:var(--panel);
+    padding:34px 30px;
+  }
+  .company-card .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--aurora);
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+  .company-card h3{margin-top:14px; font-size:1.2rem;}
+  .company-card p{color:var(--muted); margin-top:10px; font-size:0.94rem; line-height:1.7;}
 
   /* ---------- SECTION SCAFFOLDING ---------- */
   section{padding:110px 0; position:relative;}
@@ -541,6 +588,7 @@
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#about">About</a>
+      <a href="#companies">Companies</a>
       <a href="#work">Work</a>
       <a href="#contact" class="nav-cta" style="margin-top:12px;">Contact</a>
     </div>
@@ -570,10 +618,10 @@
 
       <div class="terminal reveal" id="termWrap">
         <div class="terminal-bar">
-          <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+          <span class="tdot green"></span><span class="tdot yellow"></span><span class="tdot red"></span>
           <span class="label">dinunziodotdev.ca — zsh</span>
         </div>
-        <div class="terminal-body" id="termBody" aria-hidden="true"></div>
+        <div class="terminal-body" id="termBody"></div>
       </div>
     </div>
   </section>
@@ -698,6 +746,36 @@
 
   <hr class="divider">
 
+  <!-- COMPANIES -->
+  <section id="companies">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Companies</div>
+        <h2>Organizations I have worked with</h2>
+        <p>A few of the teams and organizations I have contributed to across product, engineering, and delivery.</p>
+      </div>
+      <div class="company-grid reveal">
+        <article class="company-card">
+          <div class="kicker mono">past engagement</div>
+          <h3>SignatureAce</h3>
+          <p>Contributed to production software initiatives spanning architecture, implementation, and iterative feature delivery.</p>
+        </article>
+        <article class="company-card">
+          <div class="kicker mono">past engagement</div>
+          <h3>Orvion</h3>
+          <p>Supported platform and application development work with a focus on reliability, maintainability, and user-facing outcomes.</p>
+        </article>
+        <article class="company-card">
+          <div class="kicker mono">past engagement</div>
+          <h3>Rare Living Foundation</h3>
+          <p>Delivered engineering support for mission-driven digital experiences and operational tooling aligned with organizational goals.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- WORK / ENGAGEMENT TYPES -->
   <section id="work">
     <div class="wrap">
@@ -795,7 +873,7 @@
 
         <div class="contact-side">
           <h4>Direct</h4>
-          <div class="contact-line"><div class="k mono">Email</div><div class="v">hello@dinunziodotdev.ca</div></div>
+          <div class="contact-line"><div class="k mono">Email</div><div class="v">contact@dinunziodotdev.ca</div></div>
           <div class="contact-line"><div class="k mono">Location</div><div class="v">Edmonton, AB, Canada</div></div>
           <div class="contact-line"><div class="k mono">Founder</div><div class="v">Anthony Tyler-Scott Dinunzio</div></div>
           <div class="contact-line"><div class="k mono">Response</div><div class="v">Within 1–2 business days</div></div>
@@ -812,8 +890,9 @@
     <div class="foot-links">
       <a href="#services">Services</a>
       <a href="#process">Process</a>
+      <a href="#companies">Companies</a>
       <a href="#contact">Contact</a>
-      <a href="mailto:hello@dinunziodotdev.ca">hello@dinunziodotdev.ca</a>
+      <a href="mailto:contact@dinunziodotdev.ca">contact@dinunziodotdev.ca</a>
     </div>
   </div>
 </footer>
@@ -871,9 +950,22 @@
     { p: '', c: '  saas', out: true },
     { p: '', c: '  mobile', out: true },
     { p: '', c: '', out: false },
+    { p: '$ ', c: 'help', out: false },
+    { p: '', c: 'commands: home services process about companies work contact clear help', out: true },
+    { p: '', c: '', out: false },
     { p: '$ ', c: 'status', out: false },
-    { p: '', c: 'listening for new projects', out: true, cursor: true }
+    { p: '', c: 'ready for input', out: true }
   ];
+
+  const terminalCommands = {
+    home: '#top',
+    services: '#services',
+    process: '#process',
+    about: '#about',
+    companies: '#companies',
+    work: '#work',
+    contact: '#contact'
+  };
 
   function renderStatic() {
     termBody.innerHTML = lines.map(l => {
@@ -885,7 +977,7 @@
   }
 
   async function typeTerminal() {
-    if (reduceMotion) { renderStatic(); return; }
+    if (reduceMotion) { renderStatic(); addInputRow(); return; }
     termBody.innerHTML = '';
     for (const line of lines) {
       const div = document.createElement('div');
@@ -913,8 +1005,75 @@
       await sleep(line.out ? 60 : 140);
       termBody.scrollTop = termBody.scrollHeight;
     }
+
+    // Keep command input available after intro animation.
+    addInputRow();
   }
   function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+  function addTerminalLine(text, type = 'out') {
+    const div = document.createElement('div');
+    const span = document.createElement('span');
+    span.className = type;
+    span.textContent = text;
+    div.appendChild(span);
+    termBody.appendChild(div);
+  }
+
+  function addInputRow() {
+    const row = document.createElement('div');
+    row.className = 'terminal-input-row';
+
+    const prompt = document.createElement('span');
+    prompt.className = 'prompt';
+    prompt.textContent = '$';
+
+    const input = document.createElement('input');
+    input.id = 'termInput';
+    input.className = 'terminal-input';
+    input.type = 'text';
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+    input.placeholder = 'Try: home, services, process, about, companies, work, contact, help';
+    input.setAttribute('aria-label', 'Terminal command input');
+
+    row.appendChild(prompt);
+    row.appendChild(input);
+    termBody.appendChild(row);
+    termBody.scrollTop = termBody.scrollHeight;
+    input.focus();
+
+    wireTerminalInput(input, row);
+  }
+
+  function wireTerminalInput(input, row) {
+    input.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter') { return; }
+      event.preventDefault();
+
+      const commandRaw = input.value.trim();
+      const command = commandRaw.toLowerCase();
+      if (!commandRaw) { return; }
+
+      if (command === 'clear') {
+        termBody.innerHTML = '';
+        addInputRow();
+        return;
+      }
+
+      if (terminalCommands[command]) {
+        const target = terminalCommands[command];
+        window.location.hash = target;
+        const section = document.querySelector(target);
+        if (section) {
+          section.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        }
+      }
+
+      // Keep the terminal visually static: execute commands without appending output.
+      input.value = '';
+    });
+  }
 
   const termIO = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -940,7 +1099,7 @@
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nProject type: ${project}\n\n${message}`
     );
-    window.location.href = `mailto:hello@dinunziodotdev.ca?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:contact@dinunziodotdev.ca?subject=${subject}&body=${body}`;
     status.textContent = 'Opening your email client to send this brief…';
   });
 </script>
