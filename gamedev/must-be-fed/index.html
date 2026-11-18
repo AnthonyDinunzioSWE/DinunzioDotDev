@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Must Be Fed — Game Dev Log | DinunzioDotDev</title>
+<meta name="description" content="The development home for Must Be Fed, an independent game in development by DinunzioDotDev.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B0F14'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='60' fill='%23C9A227' text-anchor='middle'%3E.%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0B0F14;--panel:#12181F;--line:rgba(232,230,223,.12);--text:#E8E6DF;--muted:#8B94A3;--brass:#C9A227;--aurora:#3FA796;--maxw:1000px;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--text);font:16px/1.7 'IBM Plex Sans',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible{outline:2px solid #E4BE4A;outline-offset:3px}
+  .backdrop{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 35% at 50% 0%,rgba(63,167,150,.13),transparent 75%),radial-gradient(rgba(232,230,223,.045) 1px,transparent 1px);background-size:auto,26px 26px}
+  header{position:relative;border-bottom:1px solid var(--line);background:rgba(11,15,20,.75)}
+  .nav,.wrap{max-width:var(--maxw);margin:0 auto;padding-left:28px;padding-right:28px}
+  .nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+  .logo,h1,h2{font-family:'Space Grotesk',sans-serif}
+  .logo{font-size:1.1rem;font-weight:700}
+  .dot{color:var(--brass)}
+  .nav a:last-child,.text-link{font:500 .78rem 'IBM Plex Mono',monospace;color:#E4BE4A}
+  main{position:relative}
+  .hero{padding:104px 0 76px;border-bottom:1px solid var(--line)}
+  .eyebrow,.label{font:500 .76rem 'IBM Plex Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--aurora)}
+  h1{font-size:clamp(3rem,9vw,6.6rem);line-height:.98;letter-spacing:-.055em;margin:20px 0}
+  .lead{max-width:700px;color:#BBC1CA;font-size:1.18rem}
+  .status{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:9px 13px;border:1px solid var(--line);background:rgba(18,24,31,.7);font:500 .75rem 'IBM Plex Mono',monospace;color:var(--muted)}
+  .status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--aurora)}
+  .section{padding:66px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(1.7rem,4vw,2.4rem);margin:12px 0 18px}
+  .copy{max-width:720px;color:#BBC1CA}
+  .entry{max-width:720px;margin-top:32px;padding:24px;border:1px solid var(--line);background:rgba(18,24,31,.72)}
+  .entry time{font:500 .75rem 'IBM Plex Mono',monospace;color:var(--brass)}
+  .entry h3{font:600 1.15rem 'Space Grotesk',sans-serif;color:#F4F2EC;margin:12px 0}
+  .entry p{margin:0;color:#BBC1CA}
+  footer{position:relative;padding:28px 0;color:var(--muted);font: .78rem 'IBM Plex Mono',monospace}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .foot a:hover,.text-link:hover{color:#F4F2EC}
+  @media(max-width:600px){.nav,.wrap{padding-left:20px;padding-right:20px}.hero{padding:76px 0 56px}.section{padding:52px 0}}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <a class="logo" href="/">dinunzio<span class="dot">.</span>dev</a>
+    <a href="/">← Back to home</a>
+  </nav>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">DinunzioDotDev / Game Development</div>
+      <h1>Must Be Fed<span class="dot">.</span></h1>
+      <p class="lead">An independent game in development. This is the home for project updates, development notes, and announcements as the game takes shape.</p>
+      <div class="status">In development · No release date announced</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="label">The project</div>
+      <h2>More to come.</h2>
+      <p class="copy">Must Be Fed is being developed by Anthony Tyler-Scott Dinunzio at DinunzioDotDev. Game details, platforms, and launch information will be shared here when they are ready to announce. There is no public release date at this time.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="label">Development log</div>
+      <h2>Notes from the build.</h2>
+      <article class="entry">
+        <time datetime="2026-11-17">November 17, 2026</time>
+        <h3>The dev log opens</h3>
+        <p>This page is the starting point for the Must Be Fed development log. Future entries will share confirmed progress and decisions from development.</p>
+      </article>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 DinunzioDotDev · Edmonton, AB, Canada</span>
+    <span><a href="/privacy/">Privacy</a> · <a href="mailto:contact@dinunziodotdev.ca">Contact</a></span>
+  </div>
+</footer>
+</body>
+</html>
